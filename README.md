@@ -13,8 +13,8 @@
 * [clang](https://github.com/llvm/llvm-project/) or any other C++23 compliant compiler
 
 # compiling and running
-   ``git clone https://github.com/nyyakko/calculadora``\
-   ``cd ./calculadora/``\
+   ``git clone https://github.com/nyyakko/Palladium``\
+   ``cd ./Palladium/``\
    ``python configure.py ; python build.py``
 
-   ``./build/calc/calc``
+   ``./build/Palladium/Palladium``
