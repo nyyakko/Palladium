@@ -1,6 +1,9 @@
 #include "palladium/palladium.hpp"
 
 #include "palladium/color.hpp"
+#include "palladium/evaluation/core/lexer.hpp"
+#include "palladium/evaluation/core/parser.hpp"
+#include "palladium/evaluation/evaluation.hpp"
 #include "palladium/graphics/core/layout.hpp"
 #include "palladium/graphics/elements.hpp"
 
@@ -9,8 +12,7 @@
 
 #include <cassert>
 
-Palladium::Palladium(std::pair<std::int32_t, std::int32_t> resolution):
-    resolution(resolution)
+Palladium::Palladium(std::pair<std::int32_t, std::int32_t> resolution): resolution(resolution)
 {
     auto const& [width, height] = this->resolution;
                                                     
@@ -67,15 +69,15 @@ void Palladium::render()
             {
                 if (ui::element::button(color::OBSIDIAN_BLACK, color::RAY_WHITE, FONT_SIZE, "PUSH"))
                 {
-                    this->expressions.push_back(this->expression);
+                    this->expressionHistory.push_back(this->expression);
                 }
 
                 if (ui::element::button(color::OBSIDIAN_BLACK, color::RAY_WHITE, FONT_SIZE, "POP"))
                 {
                     if (!this->expression.empty())
                     {
-                        this->expression = this->expressions.back();
-                        this->expressions.pop_back();
+                        this->expression = this->expressionHistory.back();
+                        this->expressionHistory.pop_back();
                     }
                 }
 
@@ -97,7 +99,12 @@ void Palladium::render()
             }
 
             if (ui::element::button(color::OBSIDIAN_BLACK, color::RAY_WHITE, FONT_SIZE, "="))
-                assert(false && "NOT IMPLEMENTED");
+            {
+                evaluation::Lexer expressionLexer { this->expression };
+                evaluation::Parser expressionParser { expressionLexer };
+
+                this->expression = std::to_string(evaluation::evaluate(expressionParser.parse()));
+            }
 
         }
         ui::layout::end(); 
@@ -105,13 +112,12 @@ void Palladium::render()
         using namespace ui::layout;
         using namespace ui::element::pack;
 
-        auto fnAppend    = [this] (auto value) { this->expression.append(value); };
-        auto fnOperation = [this] (auto value) { (void)this; (void)value; assert(false && "NOT IMPLEMENTED"); };
+        auto fnAppend = [this] (auto value) { this->expression.append(value); };
 
-        element::pack::button(Orientation::HORIZONTAL, color::OBSIDIAN_BLACK, color::RAY_WHITE, {{ fnAppend, { "1", "2", "3" }}, { fnOperation, { " * " }}});
-        element::pack::button(Orientation::HORIZONTAL, color::OBSIDIAN_BLACK, color::RAY_WHITE, {{ fnAppend, { "4", "5", "6" }}, { fnOperation, { " / " }}});
-        element::pack::button(Orientation::HORIZONTAL, color::OBSIDIAN_BLACK, color::RAY_WHITE, {{ fnAppend, { "7", "8", "9" }}, { fnOperation, { " + " }}});
-        element::pack::button(Orientation::HORIZONTAL, color::OBSIDIAN_BLACK, color::RAY_WHITE, {{ fnAppend, { "(", "0", ")" }}, { fnOperation, { " - " }}});
+        element::pack::button(Orientation::HORIZONTAL, color::OBSIDIAN_BLACK, color::RAY_WHITE, {{ fnAppend, { "1", "2", "3", " * " }}});
+        element::pack::button(Orientation::HORIZONTAL, color::OBSIDIAN_BLACK, color::RAY_WHITE, {{ fnAppend, { "4", "5", "6", " / " }}});
+        element::pack::button(Orientation::HORIZONTAL, color::OBSIDIAN_BLACK, color::RAY_WHITE, {{ fnAppend, { "7", "8", "9", " + " }}});
+        element::pack::button(Orientation::HORIZONTAL, color::OBSIDIAN_BLACK, color::RAY_WHITE, {{ fnAppend, { "(", "0", ")", " - " }}});
     }
     ui::layout::end();
 }

@@ -5,6 +5,9 @@ set(palladium_SourceFiles ${palladium_SourceFiles}
     "${DIR}/palladium.cpp"
     "${DIR}/graphics/elements.cpp"
     "${DIR}/graphics/core/layout.cpp"
+    "${DIR}/evaluation/evaluation.cpp"
+    "${DIR}/evaluation/core/lexer.cpp"
+    "${DIR}/evaluation/core/parser.cpp"
 
     PARENT_SCOPE
 )

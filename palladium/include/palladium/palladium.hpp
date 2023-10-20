@@ -22,7 +22,7 @@ private:
     std::pair<std::int32_t, std::int32_t> resolution {};
 
     std::string expression {};
-    std::vector<std::string> expressions {};
+    std::vector<std::string> expressionHistory {};
 
     bool shift_mode = false;
 };

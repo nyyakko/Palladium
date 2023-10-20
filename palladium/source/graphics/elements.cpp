@@ -1,9 +1,13 @@
 #include "palladium/graphics/elements.hpp"
 
+#include "palladium.hpp"
 #include "palladium/graphics/core/layout.hpp"
 
 #include <raylib.h>
 #include <fmt/format.h>
+
+#include <numeric>
+#include <algorithm>
 
 #define DRAW_TEXT(CONTAINER, FONTSIZE, COLOR, CONTENT)                                                                                                                                      \
         do {                                                                                                                                                                                \
@@ -64,14 +68,14 @@ void ui::element::pack::button(ui::layout::Orientation orientation, Color backgr
 {
     auto childrenCount = std::accumulate(packs.begin(), packs.end(), 0zu, [](auto total, auto pack)
     {
-        return total + pack.names.size();
+        return total + pack.datas.size();
     }); 
                                                                                                     
     ui::layout::begin(orientation, ui::layout::slot(), childrenCount);
                                                                                                     
     for (auto const& pack : packs)
     {
-        std::ranges::for_each(pack.names, [&] (auto&& name)
+        std::ranges::for_each(pack.datas, [&] (auto&& name)
         {
             if (ui::element::button(background, foreground, FONT_SIZE, name))
             {
