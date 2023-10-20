@@ -17,7 +17,6 @@ Palladium::Palladium(std::pair<std::int32_t, std::int32_t> resolution):
     InitWindow(width, height, "Palladium");
 }
 
-
 std::int32_t Palladium::run()
 {
     SetTargetFPS(24);
