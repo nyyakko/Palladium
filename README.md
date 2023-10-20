@@ -1,4 +1,4 @@
-# crazy calculator (calculadora maluca)
+# Palladium (aka crazy calculator)
 
 <p align="center">
    <img src = "https://github.com/nyyakko/calculadora/blob/master/assets/image.png">
