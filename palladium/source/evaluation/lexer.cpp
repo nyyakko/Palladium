@@ -1,4 +1,4 @@
-#include "palladium/evaluation/core/lexer.hpp"
+#include "palladium/evaluation/lexer.hpp"
 
 #include "palladium/evaluation/core/operators.hpp"
 

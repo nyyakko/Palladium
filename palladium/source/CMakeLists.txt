@@ -6,8 +6,8 @@ set(palladium_SourceFiles ${palladium_SourceFiles}
     "${DIR}/graphics/elements.cpp"
     "${DIR}/graphics/core/layout.cpp"
     "${DIR}/evaluation/evaluation.cpp"
-    "${DIR}/evaluation/core/lexer.cpp"
-    "${DIR}/evaluation/core/parser.cpp"
+    "${DIR}/evaluation/lexer.cpp"
+    "${DIR}/evaluation/parser.cpp"
 
     PARENT_SCOPE
 )

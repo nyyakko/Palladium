@@ -1,6 +1,6 @@
 #pragma once
 
-#include "evaluation/core/lexer.hpp"
+#include "evaluation/lexer.hpp"
 
 #include <vector>
 
