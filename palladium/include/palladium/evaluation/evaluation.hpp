@@ -6,5 +6,5 @@
 
 namespace evaluation
 {
-    float evaluate(std::vector<Token> const&); 
+    float evaluate(std::vector<Token> const& expression); 
 }

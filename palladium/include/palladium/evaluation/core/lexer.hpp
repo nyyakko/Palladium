@@ -20,14 +20,14 @@ namespace evaluation
         std::vector<Token> tokenize();
     
     public:
-        Lexer operator=(Lexer const&);
+        Lexer operator=(Lexer const& lhs);
 
     private:
         std::stringstream expressionStream;
     
         bool is_eof();
-        bool is_number(std::string_view);
-        bool is_operator(std::string_view);
-        bool is_function(std::string_view);
+        bool is_number(std::string_view value);
+        bool is_operator(std::string_view value);
+        bool is_function(std::string_view value);
     };
 }

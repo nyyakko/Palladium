@@ -19,9 +19,9 @@ namespace evaluation
     private:
         Lexer lexer;
     
-        bool is_number(Token const&);
-        bool is_operator(Token const&);
-        bool is_function(Token const&);
-        bool is_parenthesis(Token const&);
+        bool is_number(Token const& token);
+        bool is_operator(Token const& token);
+        bool is_function(Token const& token);
+        bool is_parenthesis(Token const& token);
     };
 }
